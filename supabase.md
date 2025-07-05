@@ -1,0 +1,8 @@
+
+NEXT_PUBLIC_SUPABASE_URL=https://ogcnygxoiyahwjiomvtn.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9nY255Z3hvaXlhaHdqaW9tdnRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE3MjExMzQsImV4cCI6MjA2NzI5NzEzNH0.OEvGeCa2-wY6uOvOP6HpE7CYWUsSsSTDJPltdq6K2C8
+
+
+postgresql://postgres:[YOUR-PASSWORD]@db.ogcnygxoiyahwjiomvtn.supabase.co:5432/postgres
+
+a moj password za supabase bazu :123456789EmIna
