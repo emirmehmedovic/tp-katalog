@@ -49,7 +49,11 @@ import {
   Target,
   Send,
   FileText,
-  Package
+  Package,
+  Edit,
+  Save,
+  X,
+  EyeOff
 } from 'lucide-react'
 
 interface InquiriesTableProps {
@@ -79,6 +83,8 @@ export default function InquiriesTable({ inquiries }: InquiriesTableProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [localInquiries, setLocalInquiries] = useState<Inquiry[]>(inquiries)
   const [editingInquiry, setEditingInquiry] = useState<Inquiry | null>(null)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     setLocalInquiries(inquiries)
@@ -208,6 +214,87 @@ export default function InquiriesTable({ inquiries }: InquiriesTableProps) {
   const openInquiryDetails = (inquiry: Inquiry) => {
     setSelectedInquiry(inquiry)
     setIsModalOpen(true)
+  }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setLoading(true)
+    setError(null)
+
+    const formData = new FormData(e.currentTarget)
+    const data = {
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      phone: formData.get('phone') as string,
+      product_id: formData.get('product_id') as string,
+      message: formData.get('message') as string
+    }
+
+    try {
+      const { data: responseData, error } = await supabase
+        .from('inquiries')
+        .insert([data])
+        .select()
+
+      if (error) throw error
+      // Refresh the inquiries list by updating local state
+      const newInquiry: Inquiry = {
+        id: responseData?.[0]?.id || `temp-${Date.now()}`,
+        created_at: new Date().toISOString(),
+        customer_name: data.name,
+        customer_email: data.email,
+        customer_company: '',
+        product_id: data.product_id,
+        message: data.message,
+        status: 'new',
+        priority: 'medium',
+        comments: ''
+      }
+      setLocalInquiries(prev => [...prev, newInquiry])
+    } catch (error) {
+      console.error('Greška pri dodavanju upita:', error)
+      setError('Greška pri dodavanju upita')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleStatusUpdate = async (inquiryId: string, newStatus: string) => {
+    try {
+      const { error } = await supabase
+        .from('inquiries')
+        .update({ status: newStatus })
+        .eq('id', inquiryId)
+
+      if (error) throw error
+      // Update local state
+      setLocalInquiries(prev => 
+        prev.map(inquiry => 
+          inquiry.id === inquiryId ? { ...inquiry, status: newStatus as any } : inquiry
+        )
+      )
+    } catch (error) {
+      console.error('Greška pri ažuriranju statusa:', error)
+    }
+  }
+
+  const handlePriorityUpdate = async (inquiryId: string, newPriority: string) => {
+    try {
+      const { error } = await supabase
+        .from('inquiries')
+        .update({ priority: newPriority })
+        .eq('id', inquiryId)
+
+      if (error) throw error
+      // Update local state
+      setLocalInquiries(prev => 
+        prev.map(inquiry => 
+          inquiry.id === inquiryId ? { ...inquiry, priority: newPriority as any } : inquiry
+        )
+      )
+    } catch (error) {
+      console.error('Greška pri ažuriranju prioriteta:', error)
+    }
   }
 
   return (

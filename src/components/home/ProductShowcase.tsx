@@ -7,18 +7,14 @@ import { Button } from '@/components/ui/button'
 import { 
   Package, 
   ArrowRight, 
-  Star, 
   Sparkles, 
   Zap,
   Shield,
-  Car,
   Wrench,
   Droplets,
   Palette,
-  ChevronLeft,
-  ChevronRight,
   Search,
-  Filter
+  Car
 } from 'lucide-react'
 
 interface Product {

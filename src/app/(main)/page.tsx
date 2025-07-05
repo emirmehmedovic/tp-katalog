@@ -4,17 +4,11 @@ import ProductShowcase from '@/components/home/ProductShowcase'
 import StatsSection from '@/components/home/StatsSection'
 import PartnersSection from '@/components/home/PartnersSection'
 import { 
-  Car, 
   Shield, 
   Sparkles, 
-  Users, 
   Package, 
   ArrowRight, 
-  Star, 
   CheckCircle,
-  TrendingUp,
-  Award,
-  Zap,
   Globe
 } from 'lucide-react'
 
@@ -142,7 +136,7 @@ export default function HomePage() {
 
             <div className="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-orange-100">
               <div className="w-16 h-16 bg-gradient-to-br from-amber-100 to-orange-100 rounded-xl flex items-center justify-center mb-6">
-                <Users className="h-8 w-8 text-amber-600" />
+                <Shield className="h-8 w-8 text-amber-600" />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-4">
                 B2B fokus

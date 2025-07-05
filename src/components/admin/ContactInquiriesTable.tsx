@@ -32,6 +32,7 @@ export default function ContactInquiriesTable() {
   const [inquiries, setInquiries] = useState<ContactInquiry[]>([])
   const [loading, setLoading] = useState(true)
   const [selectedInquiry, setSelectedInquiry] = useState<ContactInquiry | null>(null)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     fetchInquiries()
@@ -82,6 +83,34 @@ export default function ContactInquiriesTable() {
       hour: '2-digit',
       minute: '2-digit'
     })
+  }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setLoading(true)
+    setError(null)
+
+    const formData = new FormData(e.currentTarget)
+    const data = {
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      phone: formData.get('phone') as string,
+      message: formData.get('message') as string
+    }
+
+    try {
+      const { data: responseData, error } = await supabase
+        .from('contact_inquiries')
+        .insert([data])
+
+      if (error) throw error
+      fetchInquiries()
+    } catch (error) {
+      console.error('Greška pri dodavanju upita:', error)
+      setError('Greška pri dodavanju upita')
+    } finally {
+      setLoading(false)
+    }
   }
 
   if (loading) {

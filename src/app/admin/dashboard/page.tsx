@@ -1,16 +1,14 @@
-import { createClient } from '@supabase/supabase-js'
-import InquiriesTable from '@/components/admin/InquiriesTable'
+import { createServerClient } from '@/lib/supabase'
+import { redirect } from 'next/navigation'
+import { Button } from '@/components/ui/button'
 import ProductsTable from '@/components/admin/ProductsTable'
+import InquiriesTable from '@/components/admin/InquiriesTable'
 import ContactInquiriesTable from '@/components/admin/ContactInquiriesTable'
-import { Inquiry } from '@/lib/types'
+import { Package, MessageSquare, Users, LogOut } from 'lucide-react'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 
 export default async function AdminDashboard() {
-  // Use service role key for admin access
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  )
+  const supabase = createServerClient()
 
   // Fetch inquiries with product information
   const { data: inquiries, error: inquiriesError } = await supabase
