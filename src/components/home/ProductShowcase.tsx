@@ -32,6 +32,22 @@ interface Category {
   products: Product[]
 }
 
+// Seeded random function for consistent particle positions
+const seededRandom = (seed: number) => {
+  const x = Math.sin(seed) * 10000
+  return x - Math.floor(x)
+}
+
+// Generate deterministic particle positions
+const generateParticlePositions = (count: number) => {
+  return Array.from({ length: count }, (_, i) => ({
+    left: `${seededRandom(i * 3) * 100}%`,
+    top: `${seededRandom(i * 3 + 1) * 100}%`,
+    delay: `${seededRandom(i * 3 + 2) * 3}s`,
+    duration: `${3 + seededRandom(i * 3 + 3) * 2}s`
+  }))
+}
+
 // Icons for different categories
 const categoryIcons: { [key: string]: any } = {
   'pranje-vozila': Car,
@@ -301,15 +317,15 @@ export default function ProductShowcase() {
         
         {/* Floating particles */}
         <div className="absolute inset-0">
-          {[...Array(30)].map((_, i) => (
+          {generateParticlePositions(30).map((particle, i) => (
             <div
               key={i}
               className="absolute w-2 h-2 bg-gradient-to-br from-orange-400 to-red-400 rounded-full opacity-20 animate-float"
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 3}s`,
-                animationDuration: `${3 + Math.random() * 2}s`
+                left: particle.left,
+                top: particle.top,
+                animationDelay: particle.delay,
+                animationDuration: particle.duration
               }}
             />
           ))}

@@ -1,3 +1,5 @@
+// 'use client' directive removed
+
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import ProductShowcase from '@/components/home/ProductShowcase'
@@ -11,6 +13,22 @@ import {
   CheckCircle,
   Globe
 } from 'lucide-react'
+
+// Seeded random function for consistent particle positions
+const seededRandom = (seed: number) => {
+  const x = Math.sin(seed) * 10000
+  return x - Math.floor(x)
+}
+
+// Generate deterministic particle positions
+const generateParticlePositions = (count: number) => {
+  return Array.from({ length: count }, (_, i) => ({
+    left: `${seededRandom(i * 3) * 100}%`,
+    top: `${seededRandom(i * 3 + 1) * 100}%`,
+    delay: `${seededRandom(i * 3 + 2) * 2}s`,
+    duration: `${2 + seededRandom(i * 3 + 3) * 2}s`
+  }))
+}
 
 export default function HomePage() {
   return (
@@ -160,15 +178,15 @@ export default function HomePage() {
           
           {/* Animated particles */}
           <div className="absolute inset-0">
-            {[...Array(15)].map((_, i) => (
+            {generateParticlePositions(15).map((particle, i) => (
               <div
                 key={i}
                 className="absolute w-1 h-1 bg-white/40 rounded-full animate-bounce"
                 style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                  animationDelay: `${Math.random() * 2}s`,
-                  animationDuration: `${2 + Math.random() * 2}s`
+                  left: particle.left,
+                  top: particle.top,
+                  animationDelay: particle.delay,
+                  animationDuration: particle.duration
                 }}
               />
             ))}
