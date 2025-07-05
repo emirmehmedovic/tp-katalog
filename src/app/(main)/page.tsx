@@ -105,13 +105,13 @@ export default function HomePage() {
       </section>
 
       {/* Product Showcase Section */}
-      <ProductShowcase />
+      {/* <ProductShowcase /> */}
 
       {/* Stats Section */}
-      <StatsSection />
+      {/* <StatsSection /> */}
 
       {/* Partners Section */}
-      <PartnersSection />
+      {/* <PartnersSection /> */}
 
       {/* Features Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-orange-50 via-red-50 to-amber-50">
