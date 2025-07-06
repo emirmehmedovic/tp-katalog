@@ -4,7 +4,7 @@ const contactInfo = [
   {
     icon: Phone,
     title: 'Telefon',
-    value: '+387 33 123 456',
+    value: '+387 61 577 576',
     description: 'Pozovite nas za brzu konsultaciju'
   },
   {
@@ -16,7 +16,7 @@ const contactInfo = [
   {
     icon: MapPin,
     title: 'Adresa',
-    value: 'Sarajevo, Bosna i Hercegovina',
+    value: 'Rosulje bb, Jelah',
     description: 'Glavni ured i skladište'
   },
   {

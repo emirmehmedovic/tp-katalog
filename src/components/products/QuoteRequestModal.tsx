@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Product, QuoteRequestForm } from '@/lib/types'
-import { supabase } from '@/lib/supabase'
+import { createClient } from '@/lib/supabase/client'
 import { 
   User, 
   Mail, 
@@ -27,6 +27,7 @@ interface QuoteRequestModalProps {
 }
 
 export default function QuoteRequestModal({ isOpen, onClose, product }: QuoteRequestModalProps) {
+  const supabase = createClient()
   const [formData, setFormData] = useState<QuoteRequestForm>({
     customer_name: '',
     customer_email: '',

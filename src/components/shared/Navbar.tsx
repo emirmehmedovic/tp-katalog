@@ -5,11 +5,12 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { User, LogOut, Menu, X, Phone } from 'lucide-react'
-import { supabase } from '@/lib/supabase'
+import { createClient } from '@/lib/supabase/client'
 import { useEffect, useState } from 'react'
-import { User as SupabaseUser } from '@supabase/supabase-js'
+import { User as SupabaseUser, AuthChangeEvent, Session } from '@supabase/supabase-js'
 
 export default function Navbar() {
+  const supabase = createClient()
   const pathname = usePathname()
   const [user, setUser] = useState<SupabaseUser | null>(null)
   const [loading, setLoading] = useState(true)
@@ -25,7 +26,7 @@ export default function Navbar() {
     getUser()
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
+      (event: AuthChangeEvent, session: Session | null) => {
         setUser(session?.user ?? null)
         setLoading(false)
       }

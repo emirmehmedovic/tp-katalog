@@ -49,7 +49,7 @@ export default function ContactPage() {
                 Gdje nas možete naći
               </h2>
               <p className="text-gray-600">
-                Posjetite naš ured i skladište u Sarajevu
+                Posjetite naš ured i skladište u Jelahu
               </p>
             </div>
             
