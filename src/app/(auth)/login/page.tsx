@@ -2,16 +2,13 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { createClient } from '@supabase/supabase-js'
+import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Shield, Eye, EyeOff } from 'lucide-react'
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
+const supabase = createClient()
 
 interface FormData {
   email: string
@@ -33,22 +30,20 @@ export default function LoginPage() {
     setLoading(true)
     setError(null)
 
-    try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email: formData.email,
-        password: formData.password
-      })
+    const { error } = await supabase.auth.signInWithPassword({
+      email: formData.email,
+      password: formData.password,
+    })
 
-      if (error) {
-        setError(error.message)
-      } else {
-        router.push('/admin/dashboard')
-      }
-    } catch (err) {
-      setError('Greška pri prijavi')
-    } finally {
+    if (error) {
+      setError(error.message)
       setLoading(false)
+      return
     }
+
+    router.push('/admin/dashboard')
+    router.refresh()
+    setLoading(false)
   }
 
   return (

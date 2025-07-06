@@ -174,7 +174,7 @@ export default function ProductShowcase() {
           <div className="relative bg-gradient-to-br from-white via-gray-50 to-white rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-700 border border-gray-100 overflow-hidden group-hover:border-orange-200">
             
             {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 via-red-500/5 to-amber-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 via-red-500/5 to-amber-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
             
             {/* Floating Elements */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -191,7 +191,7 @@ export default function ProductShowcase() {
                       <IconComponent className="h-8 w-8 text-orange-600" />
                     </div>
                     {/* Glow effect */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-orange-400 to-red-400 rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-orange-400 to-red-400 rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500 pointer-events-none"></div>
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold text-gray-900 group-hover:text-orange-600 transition-colors duration-300">
@@ -208,7 +208,7 @@ export default function ProductShowcase() {
                   <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg group-hover:scale-110 transition-transform duration-500">
                     {category.products.length}
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-br from-orange-400 to-red-400 rounded-full opacity-0 group-hover:opacity-30 blur-lg transition-opacity duration-500"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-orange-400 to-red-400 rounded-full opacity-0 group-hover:opacity-30 blur-lg transition-opacity duration-500 pointer-events-none"></div>
                 </div>
               </div>
             </div>
@@ -216,40 +216,39 @@ export default function ProductShowcase() {
             {/* Products Preview */}
             <div className="p-8 space-y-4">
               {category.products.slice(0, 3).map((product, productIndex) => (
-                <div
-                  key={product.id}
-                  className="flex items-center space-x-4 p-4 rounded-xl hover:bg-gradient-to-r hover:from-orange-50 hover:to-red-50 transition-all duration-300 group/product"
-                >
-                  <div className="relative w-16 h-16 bg-gray-100 rounded-xl overflow-hidden flex-shrink-0 shadow-md group-hover/product:shadow-lg transition-shadow duration-300">
-                    {product.image_url ? (
-                      <Image
-                        src={product.image_url}
-                        alt={product.name}
-                        width={64}
-                        height={64}
-                        className="object-cover group-hover/product:scale-110 transition-transform duration-500"
-                        sizes="64px"
-                      />
-                    ) : (
-                      <div className="flex items-center justify-center h-full">
-                        <Package className="h-6 w-6 text-gray-400" />
-                      </div>
-                    )}
-                    {/* Image glow */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-orange-400 to-red-400 opacity-0 group-hover/product:opacity-20 transition-opacity duration-300"></div>
+                <Link href={`/proizvodi/${product.slug}`} key={product.id} className="block p-4 rounded-xl hover:bg-gradient-to-r hover:from-orange-50 hover:to-red-50 transition-all duration-300 group/product">
+                  <div className="flex items-center space-x-4">
+                    <div className="relative w-16 h-16 bg-gray-100 rounded-xl overflow-hidden flex-shrink-0 shadow-md group-hover/product:shadow-lg transition-shadow duration-300">
+                      {product.image_url ? (
+                        <Image
+                          src={product.image_url}
+                          alt={product.name}
+                          width={64}
+                          height={64}
+                          className="object-cover group-hover/product:scale-110 transition-transform duration-500"
+                          sizes="64px"
+                        />
+                      ) : (
+                        <div className="flex items-center justify-center h-full">
+                          <Package className="h-6 w-6 text-gray-400" />
+                        </div>
+                      )}
+                      {/* Image glow */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-orange-400 to-red-400 opacity-0 group-hover/product:opacity-20 transition-opacity duration-300 pointer-events-none"></div>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-semibold text-gray-900 truncate group-hover/product:text-orange-600 transition-colors duration-300">
+                        {product.name}
+                      </h4>
+                      <p className="text-sm text-gray-500 truncate">
+                        {product.description}
+                      </p>
+                    </div>
+                    <div className="opacity-0 group-hover/product:opacity-100 transition-opacity duration-300">
+                      <ArrowRight className="h-4 w-4 text-orange-500" />
+                    </div>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <h4 className="font-semibold text-gray-900 truncate group-hover/product:text-orange-600 transition-colors duration-300">
-                      {product.name}
-                    </h4>
-                    <p className="text-sm text-gray-500 truncate">
-                      {product.description}
-                    </p>
-                  </div>
-                  <div className="opacity-0 group-hover/product:opacity-100 transition-opacity duration-300">
-                    <ArrowRight className="h-4 w-4 text-orange-500" />
-                  </div>
-                </div>
+                </Link>
               ))}
               
               {/* Show more indicator */}
@@ -264,21 +263,21 @@ export default function ProductShowcase() {
             </div>
 
             {/* Footer */}
-            <div className="p-8 bg-gradient-to-r from-orange-50 to-red-50 border-t border-gray-100">
-              <Link href={`/proizvodi?category=${category.slug}`}>
-                <Button 
-                  variant="ghost" 
-                  className="w-full group-hover:bg-white group-hover:text-orange-600 group-hover:shadow-lg transition-all duration-500 text-lg py-6"
-                >
+            <div className="border-t border-gray-100">
+              <Link
+                href={`/proizvodi?category=${category.slug}`}
+                className="block p-8 bg-gradient-to-r from-orange-50 to-red-50 group-hover:bg-white group-hover:text-orange-600 group-hover:shadow-lg transition-all duration-500"
+              >
+                <div className="flex justify-center items-center w-full text-lg">
                   <span>Pogledaj sve proizvode</span>
                   <ArrowRight className="h-5 w-5 ml-3 group-hover:translate-x-2 transition-transform duration-300" />
-                </Button>
+                </div>
               </Link>
             </div>
           </div>
 
           {/* Shadow */}
-          <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10 pointer-events-none"></div>
         </div>
       </div>
     )
@@ -380,7 +379,7 @@ export default function ProductShowcase() {
                 className="group relative bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden hover:shadow-3xl hover:scale-105 transition-all duration-300 transform-gpu"
               >
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 via-red-500/5 to-amber-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 via-red-500/5 to-amber-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
                 
                 {/* Floating Elements */}
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -397,7 +396,7 @@ export default function ProductShowcase() {
                           <IconComponent className="h-8 w-8 text-orange-600" />
                         </div>
                         {/* Glow effect */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-orange-400 to-red-400 rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500"></div>
+                        <div className="absolute inset-0 bg-gradient-to-br from-orange-400 to-red-400 rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500 pointer-events-none"></div>
                       </div>
                       <div>
                         <h3 className="text-2xl font-bold text-gray-900 group-hover:text-orange-600 transition-colors duration-300">

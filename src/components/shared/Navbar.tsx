@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { Button } from '@/components/ui/button'
-import { User, LogOut, Menu, X } from 'lucide-react'
+import { User, LogOut, Menu, X, Phone } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 import { useEffect, useState } from 'react'
 import { User as SupabaseUser } from '@supabase/supabase-js'
@@ -83,6 +83,10 @@ export default function Navbar() {
             >
               Kontakt
             </Link>
+            <a href="tel:+38761577576" className="flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors">
+              <Phone className="h-4 w-4 mr-2" />
+              +387 61 577 576
+            </a>
           </div>
 
           {/* Auth Buttons */}

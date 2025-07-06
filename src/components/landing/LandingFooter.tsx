@@ -5,26 +5,9 @@ export default function LandingFooter() {
   return (
     <footer className="bg-gray-900 py-12">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
           
-          {/* O nama */}
-          <div>
-            <h3 className="text-white font-bold mb-4">O nama</h3>
-            <div className="space-y-2">
-              <Link href="/o-nama" className="text-gray-400 hover:text-white transition text-sm block">
-                O firmi
-              </Link>
-              <Link href="/istorija" className="text-gray-400 hover:text-white transition text-sm block">
-                Naša istorija
-              </Link>
-              <Link href="/tim" className="text-gray-400 hover:text-white transition text-sm block">
-                Naš tim
-              </Link>
-              <Link href="/certifikati" className="text-gray-400 hover:text-white transition text-sm block">
-                Certifikati
-              </Link>
-            </div>
-          </div>
+
           
           {/* Kategorije proizvoda */}
           <div>
@@ -68,27 +51,7 @@ export default function LandingFooter() {
             </div>
           </div>
           
-          {/* Brzi linkovi */}
-          <div>
-            <h3 className="text-white font-bold mb-4">Brzi linkovi</h3>
-            <div className="space-y-2">
-              <Link href="/kontakt" className="text-gray-400 hover:text-white transition text-sm block">
-                Kontakt
-              </Link>
-              <Link href="/ponuda" className="text-gray-400 hover:text-white transition text-sm block">
-                Zatražite ponudu
-              </Link>
-              <Link href="/faq" className="text-gray-400 hover:text-white transition text-sm block">
-                Česta pitanja
-              </Link>
-              <Link href="/privatnost" className="text-gray-400 hover:text-white transition text-sm block">
-                Politika privatnosti
-              </Link>
-              <Link href="/uslovi" className="text-gray-400 hover:text-white transition text-sm block">
-                Uslovi korištenja
-              </Link>
-            </div>
-          </div>
+
         </div>
         
         {/* Donja linija */}

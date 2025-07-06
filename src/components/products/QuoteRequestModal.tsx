@@ -100,7 +100,7 @@ export default function QuoteRequestModal({ isOpen, onClose, product }: QuoteReq
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto">
+      <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto bg-background p-6">
         <DialogHeader className="space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">

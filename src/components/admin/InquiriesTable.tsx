@@ -64,7 +64,7 @@ const statusConfig = {
   new: { label: 'Nov', color: 'bg-blue-100 text-blue-800', icon: AlertCircle },
   contacted: { label: 'Kontaktiran', color: 'bg-yellow-100 text-yellow-800', icon: Phone },
   qualified: { label: 'Kvalifikovan', color: 'bg-purple-100 text-purple-800', icon: Target },
-  proposal_sent: { label: 'Ponuda poslana', color: 'bg-indigo-100 text-indigo-800', icon: Send },
+  proposal_sent: { label: ' poslana', color: 'bg-indigo-100 text-indigo-800', icon: Send },
   negotiation: { label: 'Pregovori', color: 'bg-orange-100 text-orange-800', icon: TrendingUp },
   won: { label: 'Dobijen', color: 'bg-green-100 text-green-800', icon: CheckCircle },
   lost: { label: 'Izgubljen', color: 'bg-red-100 text-red-800', icon: XCircle },

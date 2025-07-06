@@ -104,7 +104,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white shadow-lg hover:shadow-xl transition-all duration-200 font-medium"
             >
               <Quote className="h-4 w-4 mr-2" />
-              Ponuda
+              Zatraži ponudu
             </Button>
           </div>
         </div>
