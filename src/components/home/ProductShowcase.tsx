@@ -225,7 +225,8 @@ export default function ProductShowcase() {
                       <Image
                         src={product.image_url}
                         alt={product.name}
-                        fill
+                        width={64}
+                        height={64}
                         className="object-cover group-hover/product:scale-110 transition-transform duration-500"
                         sizes="64px"
                       />
@@ -431,7 +432,8 @@ export default function ProductShowcase() {
                           <Image
                             src={product.image_url}
                             alt={product.name}
-                            fill
+                            width={64}
+                            height={64}
                             className="object-cover group-hover/product:scale-110 transition-transform duration-500"
                             sizes="64px"
                           />
@@ -530,40 +532,6 @@ export default function ProductShowcase() {
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes fade-in-up {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        @keyframes float {
-          0%, 100% {
-            transform: translateY(0px) rotate(0deg);
-          }
-          50% {
-            transform: translateY(-20px) rotate(180deg);
-          }
-        }
-        
-        .animate-fade-in-up {
-          animation: fade-in-up 0.6s ease-out forwards;
-        }
-        
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-        
-        .perspective-1000 {
-          perspective: 1000px;
-        }
-      `}</style>
     </section>
   )
 } 

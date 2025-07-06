@@ -84,6 +84,8 @@ export default function StatsSection() {
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
+    if (typeof window === 'undefined') return
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -115,15 +117,20 @@ export default function StatsSection() {
         
         {/* Animated particles */}
         <div className="absolute inset-0">
-          {[...Array(20)].map((_, i) => (
+          {Array.from({ length: 20 }, (_, i) => ({
+            left: `${(i * 7) % 100}%`,
+            top: `${(i * 11) % 100}%`,
+            delay: `${(i * 0.3) % 2}s`,
+            duration: `${2 + (i * 0.2) % 2}s`
+          })).map((particle, i) => (
             <div
               key={i}
               className="absolute w-1 h-1 bg-white/30 rounded-full animate-pulse"
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 2}s`,
-                animationDuration: `${2 + Math.random() * 2}s`
+                left: particle.left,
+                top: particle.top,
+                animationDelay: particle.delay,
+                animationDuration: particle.duration
               }}
             />
           ))}
@@ -218,23 +225,6 @@ export default function StatsSection() {
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes fade-in-up {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        .animate-fade-in-up {
-          animation: fade-in-up 0.6s ease-out forwards;
-        }
-      `}</style>
     </section>
   )
 } 

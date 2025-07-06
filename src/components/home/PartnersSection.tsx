@@ -66,6 +66,8 @@ export default function PartnersSection() {
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
+    if (typeof window === 'undefined') return
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -132,7 +134,8 @@ export default function PartnersSection() {
                   <Image
                     src={partner.logo}
                     alt={partner.name}
-                    fill
+                    width={80}
+                    height={80}
                     className="object-cover group-hover:scale-110 transition-transform duration-300"
                     sizes="80px"
                   />
@@ -215,23 +218,6 @@ export default function PartnersSection() {
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes fade-in-up {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        .animate-fade-in-up {
-          animation: fade-in-up 0.6s ease-out forwards;
-        }
-      `}</style>
     </section>
   )
 } 
